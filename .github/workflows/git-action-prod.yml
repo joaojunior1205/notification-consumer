@@ -32,10 +32,7 @@ jobs:
       - name: Get version from git tags
         id: version
         run: |
-          VERSION=$(git describe --tags --abbrev=0)
-          if [[ -z "$VERSION" ]]; then
-            VERSION="v0.1.0"
-          fi
+          VERSION="v1.0.${{ github.run_number }}"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build Docker
