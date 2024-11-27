@@ -59,27 +59,27 @@ jobs:
           key: ${{ secrets.ORACLE_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            CONSUMER_RUNNING=$(docker ps -q -f name=consumer-notification)
-            CONSUMER_IMAGE_EXISTS=$(docker images -q joaojunior1205/consumer-notification:latest)
+            CONSUMER_RUNNING=$(docker ps -q -f name=notification-consumer)
+            CONSUMER_IMAGE_EXISTS=$(docker images -q joaojunior1205/notification-consumer:latest)
   
             if [ -n "$CONSUMER_RUNNING" ]; then
               echo "Parando consumer..."
-              docker rm -f consumer-notification
+              docker rm -f notification-consumer
             else
               echo "Contêiner consumer não está em execução."
             fi
   
             if [ -n "$CONSUMER_IMAGE_EXISTS" ]; then
               echo "Removendo a imagem do consumer..."
-              docker rmi joaojunior1205/consumer-notification:latest
+              docker rmi joaojunior1205/notification-consumer:latest
             else
               echo "Imagem do consumer não encontrada."
             fi
   
             echo "Baixando a imagem mais recente do consumer..."
-            docker pull joaojunior1205/consumer-notification:latest
+            docker pull joaojunior1205/notification-consumer:latest
             docker run -p 9051:9051 \
-                          --name consumer-notification \
+                          --name notification-consumer \
                           --network bufunfa \
                           -e RABBITMQ_USER='${{ secrets.RABBITMQ_USER }}' \
                           -e RABBITMQ_PASSWORD='${{ secrets.RABBITMQ_PASSWORD }}' \
@@ -90,4 +90,4 @@ jobs:
                           -e RABBITMQ_PREFETCH='${{ secrets.RABBITMQ_PREFETCH }}' \
                           -e RABBITMQ_QUEUE='${{ secrets.RABBITMQ_QUEUE }}' \
                           -e NOTIFICATION_COLLECTION_NAME='${{ secrets.NOTIFICATION_COLLECTION_NAME }}' \
-                          -d joaojunior1205/consumer-notification:latest
+                          -d joaojunior1205/notification-consumer:latest
