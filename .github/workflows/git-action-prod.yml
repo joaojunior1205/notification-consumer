@@ -59,8 +59,8 @@ jobs:
           key: ${{ secrets.ORACLE_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            CONSUMER_RUNNING=$(docker ps -q -f name=notification-consumer)
-            CONSUMER_IMAGE_EXISTS=$(docker images -q joaojunior1205/notification-consumer:latest)
+            CONSUMER_RUNNING=$(docker ps -a -q -f name=notification-consumer)
+            CONSUMER_IMAGE_EXISTS=$(docker images -a -q joaojunior1205/notification-consumer:latest)
   
             if [ -n "$CONSUMER_RUNNING" ]; then
               echo "Parando consumer..."
