@@ -41,8 +41,8 @@ jobs:
 
       - name: Push Docker image with tag and latest
         run: |
-          docker push joaojunior1205/bf-dev:$VERSION
-          docker push joaojunior1205/bf-dev:latest
+          docker push joaojunior1205/notification-consumer:$VERSION
+          docker push joaojunior1205/notification-consumer:latest
 
       - name: Commit and push version update
         run: |
