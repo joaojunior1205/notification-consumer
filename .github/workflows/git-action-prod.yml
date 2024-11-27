@@ -38,6 +38,7 @@ jobs:
       - name: Build Docker
         run: |
           docker build --platform linux/amd64 -t joaojunior1205/notification-consumer:$VERSION .
+          docker tag joaojunior1205/notification-consumer:$VERSION joaojunior1205/notification-consumer:latest
 
       - name: Push Docker image with tag and latest
         run: |
