@@ -1,11 +1,20 @@
 require('dotenv').config();
 
-const RABBIT_URL = `amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}/${process.env.RABBITMQ_VHOST}`;
-const QUEUE = process.env.RABBITMQ_QUEUE || "push-notification";
-const EXCHANGE = process.env.RABBITMQ_EXCHANGE || "amq.direct";
+const user = encodeURIComponent(process.env.RABBITMQ_USER)
+const password = encodeURIComponent(process.env.RABBITMQ_PASSWORD)
+const host = encodeURIComponent(process.env.RABBITMQ_HOST)
+const port = encodeURIComponent(process.env.RABBITMQ_PORT)
+const vhost = encodeURIComponent(process.env.RABBITMQ_VHOST)
+const queue = encodeURIComponent(process.env.RABBITMQ_QUEUE)
+const exchange = encodeURIComponent(process.env.RABBITMQ_EXCHANGE)
+const notificationCollectionName = encodeURIComponent(process.env.NOTIFICATION_COLLECTION_NAME)
+
+const RABBIT_URL = `amqp://${user}:${password}@${host}:${port}/${vhost}`;
+const QUEUE = queue || "push-notification";
+const EXCHANGE = exchange || "amq.direct";
 const PREFETCH = Number(process.env.RABBITMQ_PREFETCH) || 10;
 
-const NOTIFICATION_COLLECTION_NAME = process.env.NOTIFICATION_COLLECTION_NAME || "users-notification-developer"; // PROD = users-notification-production
+const NOTIFICATION_COLLECTION_NAME = notificationCollectionName || "users-notification-developer"; // PROD = users-notification-production
 
 module.exports = {
     RABBIT_URL,
