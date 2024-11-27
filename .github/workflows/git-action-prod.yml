@@ -47,8 +47,7 @@ jobs:
 
       - name: Commit and push version update
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "Your Name"
-          git add version.txt
+          git config --global user.email "joaojunior1205@gmail.com"
+          git config --global user.name "Joao Junior"
           git tag $VERSION
           git push --tags
