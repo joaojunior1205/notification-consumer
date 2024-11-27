@@ -1,0 +1,20 @@
+{
+  "name": "notification-consumer",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "logs": "pm2 logs notificacao-service"
+  },
+  "author": "João Júnior",
+  "license": "ISC",
+  "description": "Consumer to process and send push notifications",
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "dotenv": "^16.4.5",
+    "firebase": "^11.0.2",
+    "firebase-admin": "^13.0.0",
+    "winston": "^3.17.0",
+    "winston-graylog2": "^2.1.2"
+  }
+}
